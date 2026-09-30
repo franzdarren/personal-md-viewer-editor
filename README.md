@@ -18,65 +18,17 @@ Press the **?** button in the app for the full list of shortcuts.
 
 ## Run it on your computer
 
-You need **Node.js 20.19 or newer** (22 LTS is a good choice). To check, open a terminal and run:
-
-```
-node --version
-```
-
-You should see something like `v22.12.0`. If the command isn't found or the number is lower, install the LTS version from https://nodejs.org and open a new terminal.
-
-1. Unzip the project and open a terminal **inside the `md-preview` folder** (the one that contains `package.json`).
-   - VS Code: *File → Open Folder…* → pick `md-preview`, then *Terminal → New Terminal*. The terminal opens in the right folder.
-   - Windows Explorer: open the `md-preview` folder, click the address bar, type `cmd` and press Enter.
-2. Install the dependencies (takes a minute the first time; it creates a `node_modules` folder):
-   ```
+You need **Node.js 20.19 or newer**
+   ```bash
    npm install
-   ```
-   It ends with a line like `added 180 packages`. Warnings about funding are safe to ignore.
-3. Start the development server:
-   ```
    npm run dev
    ```
    It prints `Local: http://localhost:5173/`. Open that address in your browser. Saving a source file reloads the page automatically. Press `Ctrl+C` in the terminal to stop it.
 4. Optional: check the production build the same way Vercel will run it:
-   ```
+   ``` bash
    npm run build
    npm run preview
    ```
-   `npm run build` type-checks and writes the site to `dist/`. `npm run preview` serves it at `http://localhost:4173/`.
-
-## Deploy to Vercel
-
-No configuration file is needed; Vercel recognises Vite projects.
-
-### Option A: from GitHub (updates deploy automatically)
-
-1. Create an empty repository on https://github.com/new (for example `md-preview`). Don't add a README or .gitignore there; the project already has them.
-2. In the terminal, inside the `md-preview` folder, run these one at a time (replace `YOUR-USERNAME`):
-   ```
-   git init
-   git add .
-   git commit -m "md-preview markdown editor"
-   git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/md-preview.git
-   git push -u origin main
-   ```
-   `node_modules` and `dist` are excluded by `.gitignore`, so the push is small.
-3. Go to https://vercel.com, sign in with GitHub, click **Add New… → Project**, and click **Import** next to the `md-preview` repository.
-4. On the configuration screen check that:
-   - **Framework Preset** says **Vite**
-   - **Build Command** is `npm run build` (or left as the default)
-   - **Output Directory** is `dist`
-5. Click **Deploy**. After about a minute you get a URL like `https://md-preview-xxxx.vercel.app`.
-
-From now on, every `git push` to `main` redeploys the site.
-
-### Option B: from the terminal with the Vercel CLI
-
-1. Install the CLI once: `npm install -g vercel`
-2. In the `md-preview` folder run `vercel`. The first time it asks you to log in (a browser window opens), then asks a few questions. Accept the defaults: it detects Vite, `npm run build` and `dist`.
-3. That creates a **preview** deployment and prints its URL. When you're happy, run `vercel --prod` for the production URL.
 
 ## Where the data lives
 
