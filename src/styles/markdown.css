@@ -239,15 +239,9 @@
 
 .markdown-body hr {
   border: 0;
-  height: 1.4em;
+  border-top: 1px solid var(--rule);
+  height: 0;
   margin: 2.2em 0;
-  text-align: center;
-  color: var(--faint);
-}
-.markdown-body hr::after {
-  content: '⁂';
-  font-size: 1.1em;
-  letter-spacing: 0.4em;
 }
 
 .markdown-body table {
