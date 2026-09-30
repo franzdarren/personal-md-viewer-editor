@@ -32,7 +32,7 @@ export interface Settings {
 }
 
 const DEFAULT_SETTINGS: Settings = {
-  theme: 'system',
+  theme: 'dark',
   view: 'split',
   split: 0.5,
   syncScroll: true,

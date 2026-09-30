@@ -1,5 +1,5 @@
 {
-  "name": "tinta",
+  "name": "md-preview",
   "private": true,
   "version": "1.0.0",
   "description": "Markdown live preview with an editable preview, dark mode and in-browser autosave.",

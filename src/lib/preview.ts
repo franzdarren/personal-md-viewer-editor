@@ -211,7 +211,7 @@ export class PreviewController {
         mermaid.initialize({
           startOnLoad: false,
           securityLevel: 'strict',
-          // Diagram colours follow Tinta's ink-and-paper palette.
+          // Diagram colours follow the editor's ink-and-paper palette.
           theme: 'base',
           themeVariables:
             this.theme === 'dark'

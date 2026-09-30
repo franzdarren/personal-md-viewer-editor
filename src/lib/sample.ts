@@ -1,4 +1,4 @@
-export const SAMPLE = `# Welcome to Tinta
+export const SAMPLE = `# Welcome to md-preview
 
 Write Markdown on the left and watch it render on the right. **The right side is editable too** — click into this paragraph, change a word, and the Markdown on the left follows.
 

@@ -31,7 +31,7 @@ export function HelpDialog({ open, onClose, onOpenSample }: Props) {
         <X size={18} />
       </button>
       <div className="modal-body">
-        <h2 id="help-title">How Tinta works</h2>
+        <h2 id="help-title">How md-preview works</h2>
         <p>
           Type Markdown on the left and the rendered document appears on the right. You can also type
           directly in the rendered document: the Markdown updates to match.

@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from 'react';
 import {
   ChevronDown, CircleQuestionMark, Columns2, Copy, Download, Eye, FileCode, FileDown, Link2, Link2Off,
-  Monitor, Moon, PenLine, Printer, Share2, Sun,
+  Moon, PenLine, Printer, Share2, Sun,
 } from 'lucide-react';
 
 import { shareUrl, type Boot } from './bootstrap';
@@ -12,7 +12,7 @@ import { SAMPLE } from './lib/sample';
 import { buildHtmlDocument, copyText, downloadFile, slugify } from './lib/exporting';
 import {
   deleteDoc, deriveTitle, loadDoc, loadIndex, newId, saveDoc, saveIndex, saveSettings,
-  type DocIndex, type Settings, type ThemeSetting, type ViewMode,
+  type DocIndex, type Settings, type ViewMode,
 } from './lib/storage';
 
 import { FormatBar, modKey } from './components/FormatBar';
@@ -228,8 +228,8 @@ export function App({ boot }: { boot: Boot }) {
     setSettings((s) => ({ ...s, view: next }));
   }
 
-  function changeTheme(next: ThemeSetting) {
-    setSettings((s) => ({ ...s, theme: next }));
+  function toggleTheme() {
+    setSettings((s) => ({ ...s, theme: theme === 'dark' ? 'light' : 'dark' }));
   }
 
   async function runExport(action: ExportAction) {
@@ -504,7 +504,7 @@ export function App({ boot }: { boot: Boot }) {
   const current = index.docs.find((d) => d.id === index.currentId);
   const title = current?.title ?? 'Untitled';
   useEffect(() => {
-    document.title = `${title} · Tinta`;
+    document.title = `${title} · md-preview`;
   }, [title]);
 
   // -------------------------------------------------------------- divider
@@ -545,15 +545,13 @@ export function App({ boot }: { boot: Boot }) {
 
   // ---------------------------------------------------------------- render
 
-  const ThemeIcon = settings.theme === 'system' ? Monitor : settings.theme === 'dark' ? Moon : Sun;
-
   return (
     <div className="app">
       <header className="topbar">
         <button type="button" className="brand" onClick={() => setDrawerOpen(true)} title="Your documents">
           <img className="brand-mark" src="/favicon.svg" alt="" />
           <span className="brand-text">
-            <span className="brand-name">Tinta</span>
+            <span className="brand-name">md-preview</span>
             <span className="brand-doc">{title}</span>
           </span>
           <ChevronDown size={14} className="brand-chevron" aria-hidden="true" />
@@ -596,16 +594,15 @@ export function App({ boot }: { boot: Boot }) {
           </button>
         </div>
 
-        <Menu<ThemeSetting>
-          title="Theme"
-          trigger={<ThemeIcon size={17} strokeWidth={1.9} />}
-          onSelect={changeTheme}
-          items={[
-            { key: 'light', label: 'Light', icon: Sun, checked: settings.theme === 'light' },
-            { key: 'dark', label: 'Dark', icon: Moon, checked: settings.theme === 'dark' },
-            { key: 'system', label: 'Match my system', icon: Monitor, checked: settings.theme === 'system' },
-          ]}
-        />
+        <button
+          type="button"
+          className="icon-btn"
+          title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          onClick={toggleTheme}
+        >
+          {theme === 'dark' ? <Sun size={17} strokeWidth={1.9} /> : <Moon size={17} strokeWidth={1.9} />}
+        </button>
 
         <Menu<ExportAction>
           title="Export, copy, share or print"
